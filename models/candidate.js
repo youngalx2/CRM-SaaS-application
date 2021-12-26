@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose  = require('mongoose');
 
 let Candidate = mongoose.model('Candidate', {
 
@@ -26,7 +26,7 @@ let Candidate = mongoose.model('Candidate', {
         trim : true,
         default : null
     },
-    availableFrom : {
+    availableAt : {
         type : Date,
         default : null
     },
@@ -34,10 +34,19 @@ let Candidate = mongoose.model('Candidate', {
         type : Date,
         default : null
     },
+    _account : {
+        type : mongoose.Schema.ObjectId,
+        ref :  'Account',
+        required : true
+    },
     updatedAt : {
         type : Date,
         default : Date.now()
-    }
+    },
+    deletedAt : {
+        type : Date,
+        default : null
+    },
 });
 
 module.exports = Candidate;

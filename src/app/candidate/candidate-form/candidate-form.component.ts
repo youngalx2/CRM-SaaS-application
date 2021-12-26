@@ -1,4 +1,4 @@
-import {Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as _ from 'lodash';
 
@@ -11,13 +11,15 @@ export class CandidateFormComponent implements OnInit {
 
   candidateForm: FormGroup;
   @Input() candidate: any = {};
+  @Output() onSubmitted = new EventEmitter();
 
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit() {
     this.candidateForm = this.formBuilder.group({
       firstname: ['', Validators.required],
-      lastname: ['', Validators.required]
+      lastname: ['', Validators.required],
+      email: ['', Validators.required]
     });
   }
 
@@ -27,5 +29,9 @@ export class CandidateFormComponent implements OnInit {
     if(!_.isEmpty(candidate)) {
       this.candidateForm.patchValue(candidate);
     }
+  }
+
+  onSubmit() {
+    this.onSubmitted.emit(this.candidateForm.value);
   }
 }
