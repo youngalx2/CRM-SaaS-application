@@ -4,9 +4,10 @@ const Schema    = mongoose.Schema;
 let subscriptionSchema = new Schema({
 
     subtotal : {
-        type: String,
+        type: Number,
         required : true,
-        trim : true
+        trim : true,
+        default : 0
     },
     currency : {
         type : String
@@ -28,14 +29,9 @@ let subscriptionSchema = new Schema({
     enabledAt : {
         type : Date,
         default : null
-    },
-    deletedAt : {
-        type : Date,
-        default : null
     }
 });
 
-subscriptionSchema.plugin(require('./../plugins/updated-at'));
 let Subscription = mongoose.model('Subscription', subscriptionSchema);
 
 module.exports = Subscription;

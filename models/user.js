@@ -5,12 +5,10 @@ let userSchema = new Schema ({
 
     firstname : {
         type: String,
-        required : true,
         trim : true
     },
     lastname : {
         type: String,
-        required : true,
         trim : true
     },
     email : {
@@ -39,16 +37,10 @@ let userSchema = new Schema ({
         ref : 'Agency'
     },
     _type : {
-        type : Schema.ObjectId,
+        type : String,
         ref : 'UserType'
-    },
-    deletedAt : {
-        type : Date,
-        default : null
     }
 });
-
-userSchema.plugin(require('./../plugins/updated-at'));
 
 let User = mongoose.model('User', userSchema);
 
