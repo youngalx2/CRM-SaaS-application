@@ -28,6 +28,7 @@ app.use(require('node-sass-middleware')({
   indentedSyntax: true,
   sourceMap: true
 }));
+
 app.use(express.static(path.join(__dirname, 'dist')));
 
 app.use(function(req, res, next) {
@@ -39,7 +40,7 @@ app.use(function(req, res, next) {
 app.use('/api/account', account);
 app.use('/api/user', user);
 app.use('/api/candidate', candidate);
-app.use('/api/user', candidate);
+app.use('/api/user', user);
 
 // catch 404 and send frontend app
 app.use((req, res, next) => {

@@ -18,6 +18,11 @@ let subscriptionSchema = new Schema({
     token : {
         type : String
     },
+    _account : {
+        type : Schema.ObjectId,
+        ref : 'Account',
+        required : true
+    },
     cancelledAt : {
         type : Date,
         default : null
@@ -29,6 +34,13 @@ let subscriptionSchema = new Schema({
     enabledAt : {
         type : Date,
         default : null
+    }
+});
+
+subscriptionSchema.set('toJSON', {
+    transform: function(doc, ret, options) {
+        delete ret.token;
+        return ret;
     }
 });
 
