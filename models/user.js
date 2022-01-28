@@ -1,5 +1,6 @@
 const mongoose  = require('mongoose');
 const Schema    = mongoose.Schema;
+const bcrypt    = require('bcryptjs');
 
 let userSchema = new Schema ({
 
@@ -14,7 +15,8 @@ let userSchema = new Schema ({
     email : {
         type : String,
         required : true,
-        trim : true
+        trim : true,
+        unique : true
     },
     password : {
         type : String,
@@ -50,6 +52,19 @@ userSchema.set('toJSON', {
         delete ret.token;
         delete ret.password;
         return ret;
+    }
+});
+
+userSchema.pre('save', function(next) {
+
+    if(this.isModified('password')) {
+        bcrypt.hash(this.password, 10, (err, hash) => {
+            this.password = hash;
+            next();
+        });
+    }
+    else {
+        next();
     }
 });
 
