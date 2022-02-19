@@ -2,7 +2,7 @@ const mongoose  = require('mongoose');
 const Schema    = mongoose.Schema;
 const bcrypt    = require('bcryptjs');
 
-let userSchema = new Schema ({
+let userSchema = new Schema({
 
     firstname : {
         type: String,
@@ -34,7 +34,7 @@ let userSchema = new Schema ({
     },
     _account : {
         type: Schema.ObjectId,
-        ref : 'Company',
+        ref : 'Account',
         required : true
     },
     _agency : {
@@ -68,6 +68,4 @@ userSchema.pre('save', function(next) {
     }
 });
 
-let User = mongoose.model('User', userSchema);
-
-module.exports = User;
+module.exports = mongoose.model('User', userSchema);
