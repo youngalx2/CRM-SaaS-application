@@ -1,0 +1,12 @@
+<form (submit)="onSubmit()" [formGroup]="loginForm">
+
+    <input formControlName="email" placeholder="Email">
+    <input formControlName="password" placeholder="Password">
+
+    <button type="submit" [disabled]="!loginForm.valid">Login</button>
+
+</form>
+
+<div *ngIf="queryParams.accountActivated">Your account is now active, you can login to the application</div>
+<div *ngIf="queryParams.logged_out">You are now logged out</div>
+<div *ngIf="loginMessage">{{ loginMessage }}</div>

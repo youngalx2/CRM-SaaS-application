@@ -1,0 +1,3 @@
+<app-user-form [user]="user" (submitted)="onSubmit()"></app-user-form>
+<p *ngIf="userCreatedMessage">{{ userCreatedMessage }}</p>
+<p *ngIf="userUpdatedMessage">{{ userUpdatedMessage }}</p>
